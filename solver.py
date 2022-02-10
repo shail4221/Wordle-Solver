@@ -11,8 +11,6 @@ score_dict = {'E':26, 'S':25, 'A':24, 'O':23, 'R':22, 'I':21, 'L':20, 'T':19,
 
 yellow_score_dict = score_dict
 
-iteration_wordlists = []
-
 def score_words(wordlist, scores):
     scored_words = {}
 
@@ -32,11 +30,12 @@ with open('Resources/scored_wordlist.txt') as f:
 
 unaltered_word_dictionary = json.loads(data)
 
+iteration = 0
+
 print("Please enter Wordle output as a combination of N,G, and Y. N is for a Grey letter, G is for a Green letter, and Y is for a Yellow letter:")
 
 unaltered_word_list = list(unaltered_word_dictionary.keys())
 updated_word_list = list(unaltered_word_dictionary.keys())
-iteration_wordlists.append(updated_word_list)
 
 next_word = updated_word_list[0]
 
@@ -44,8 +43,6 @@ yellow_letters = []
 grey_letters = []
 green_letters = []
 word_model = ['[A-Z]', '[A-Z]', '[A-Z]', '[A-Z]', '[A-Z]']
-
-iteration = 0
 
 while(next_word != "no next word"):
     iteration += 1
@@ -75,7 +72,7 @@ while(next_word != "no next word"):
 
     elif(len(reponse) != 5):
         print("Invalid response, exiting")
-        break
+        exit()
     
     else:
         for i in range(0, 5):
@@ -98,7 +95,6 @@ while(next_word != "no next word"):
                 print("Invalid response, exiting")
                 break
             updated_word_list = score_words(updated_word_list, yellow_score_dict)
-            iteration_wordlists.append(updated_word_list)
         print("One rotation complete, word model at the moment is " + ''.join(word_model))
 
         if(len(updated_word_list) == 0):
