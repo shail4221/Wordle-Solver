@@ -56,7 +56,15 @@ while(next_word != "no next word"):
         new_list = [x for x in unaltered_word_list if regex_expression.match(x)]
         print(new_list)
         if(new_list is not Empty):
-            print("The final guess is " + new_list[0])
+            #filter out all words with grey letters
+            for letter in grey_letters:
+                print("removing character " + letter)
+                new_list = [x for x in new_list if letter not in x]
+                print(new_list)
+            if(new_list is not Empty):
+                print("Final word: " + new_list[0])
+            else:
+                print("The program was not able to find a suitable word (sry)")
         else:
             print("The program was not able to find a suitable word (sry)")
         break
@@ -86,11 +94,13 @@ while(next_word != "no next word"):
                 word_model[i] = "[" + next_word[i] + "]"
                 if('[A-Z]' not in word_model):
                     print("The wordle word for today is " + ''.join(word_model))
-                    break
+                    exit()
             else:
                 print("Invalid response, exiting")
                 break
+
         print("one rotation complete, word model at the moment is " + ''.join(word_model))
+
         if(len(updated_word_list) == 0):
             next_word = "no next word"
             print("There are no more valid words")
