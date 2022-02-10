@@ -32,7 +32,7 @@ with open('Resources/scored_wordlist.txt') as f:
 
 unaltered_word_dictionary = json.loads(data)
 
-print("Please enter Wordle output as a combination of N,G, and Y. N is for a Grey letter, G is for a Green letter, and Y is for a Yellow letter")
+print("Please enter Wordle output as a combination of N,G, and Y. N is for a Grey letter, G is for a Green letter, and Y is for a Yellow letter:")
 
 unaltered_word_list = list(unaltered_word_dictionary.keys())
 updated_word_list = list(unaltered_word_dictionary.keys())
@@ -55,20 +55,20 @@ while(next_word != "no next word"):
         new_list = [x for x in unaltered_word_list if regex_expression.match(x)]
         if(new_list is not Empty):
             for letter in grey_letters:
-                print("removing character " + letter)
+                print("Removing character " + letter)
                 new_list = [x for x in new_list if letter not in x]
-                print(new_list)
+                print("Remaining words: ", new_list)
             if(new_list is not Empty):
                 print("Final word: " + new_list[0])
             else:
-                print("The program was not able to find a suitable word (sry)")
+                print("The program was not able to find a suitable word")
         else:
-            print("The program was not able to find a suitable word (sry)")
+            print("The program was not able to find a suitable word")
         break
 
     print("Try " + next_word)
 
-    reponse = str(input('What was the wordle output?')).upper()
+    reponse = str(input('What was the wordle output? ')).upper()
     
     if(reponse == "exit pls"):
         break
@@ -99,7 +99,7 @@ while(next_word != "no next word"):
                 break
             updated_word_list = score_words(updated_word_list, yellow_score_dict)
             iteration_wordlists.append(updated_word_list)
-        print("one rotation complete, word model at the moment is " + ''.join(word_model))
+        print("One rotation complete, word model at the moment is " + ''.join(word_model))
 
         if(len(updated_word_list) == 0):
             next_word = "no next word"
